@@ -129,3 +129,59 @@ delete from CONSTRAINTS_TMP where hiring_date is null;
 
 show create table CONSTRAINTS_TMP;
 
+CREATE TABLE EMP1
+(
+emp_id int,
+emp_name VARCHAR(50),
+age int,
+primary key(emp_id)
+);
+
+INSERT INTO EMP1 VALUES(01,'abhi',20);
+INSERT INTO EMP1 VALUES(2,'a',22);
+
+select * from EMP1;
+
+INSERT INTO EMP1 VALUES(4,'ss',23);
+drop table EMP1;
+
+---FOREIGN KEY---
+
+
+CREATE TABLE CUSTOMER
+(
+  cust_id int,
+  name varchar(50),
+  age INT,
+  constraint pk primary key (cust_id)
+);
+
+CREATE TABLE orders
+(
+  order_id int,
+  amount int,
+  customer_id int,
+  constraint pk primary key (order_id),
+  constraint fk foreign key(customer_id) REFERENCES CUSTOMER(cust_id)
+
+);
+
+select * from CUSTOMER;
+select * from orders;
+drop table orders;
+drop table CUSTOMER;
+
+
+----SELECT COMMAND---
+
+SELECT * FROM CONSTRAINTS_TMP;
+
+SELECT salary,id from CONSTRAINTS_TMP;
+select salary from CONSTRAINTS_TMP where id='1';
+
+select id,name as full_name from CONSTRAINTS_TMP where salary<4000;
+
+select * from CONSTRAINTS_TMP where id is null;
+
+select count(1) from CONSTRAINTS_TMP;
+select count(1),salary from CONSTRAINTS_TMP group by salary order by salary;

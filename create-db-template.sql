@@ -185,3 +185,63 @@ select * from CONSTRAINTS_TMP where id is null;
 
 select count(1) from CONSTRAINTS_TMP;
 select count(1),salary from CONSTRAINTS_TMP group by salary order by salary;
+
+select id,name,salary as old_salary,(salary + salary * 20/100) as new_salary from employee;
+
+
+
+
+
+CREATE TABLE Persons (
+    PersonID int,
+
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+drop table Persons;
+
+CREATE TABLE customer (
+    ID int,
+    LastName varchar(255),
+    salary int,
+    City varchar(255)
+);
+
+insert into customer VALUES(1,'abhi',3000,'satara'),(2,'raj',4000,'pune'),(3,'sahil',5000,'mumbai'),(4,'ashsih',2000,'pune');
+select * from customer;
+
+select * from customer limit 2;
+
+--order by--
+
+select * from customer order by salary desc;
+
+--write a query to display of the employee who is getting maximun salary in the compony.
+
+select * from customer order by salary desc limit 1;
+
+select * from customer order by salary limit 1;
+
+select * from customer where salary>=4000;
+select * from customer where salary<5000 and city='pune';
+select * from customer where salary between '3000' and '5000';
+
+--LIKE OPERATOR--
+
+---% means zero on more than 0 characters
+--- _ means one characters
+select * from customer where lastname like'S%';
+
+-- write a query to filter records where name has only exactly 5 characters.
+select * from customer where lastname like'_____';
+select * from customer where length(lastname)=5;
+
+insert into customer values(null,'sai',null,'nashik'),(5,null,7000,'nashik');
+
+select * from customer where salary is null;
+select * from customer where salary is not null;
+
+
+---GROUP BY CLAUSE---

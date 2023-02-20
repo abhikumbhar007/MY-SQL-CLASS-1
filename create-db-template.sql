@@ -245,3 +245,28 @@ select * from customer where salary is not null;
 
 
 ---GROUP BY CLAUSE---
+
+create table orders_data
+(
+  cust_id int,
+  order_id int,
+  country varchar(50),
+  state varchar(50)
+);
+
+insert into orders_data values(1,100,'USA','seatle');
+insert into orders_data values(2,103,'India','UP');
+insert into orders_data values(2,101,'India','bihar');
+insert into orders_data values(3,102,'USA','seatle');
+insert into orders_data values(4,103,'UK','london');
+insert into orders_data values(3,120,'India','maharashtra');
+insert into orders_data values(5,130,'India','delhi');
+insert into orders_data values(6,120,'USA','seatle');
+insert into orders_data values(7,101,'India','goa');
+insert into orders_data values(15,100,'USA','seatle');
+
+select * from orders_data;
+
+---find the total orders placed within each country.
+select country,count(1) as Total_orders from orders_data group by country;
+

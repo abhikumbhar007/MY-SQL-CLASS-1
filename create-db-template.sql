@@ -270,3 +270,40 @@ select * from orders_data;
 ---find the total orders placed within each country.
 select country,count(1) as Total_orders from orders_data group by country;
 
+create table if not exists employee(
+    id int,
+    name VARCHAR(50),
+    age int,
+    hiring_date date,
+    salary int,
+    city varchar(50)
+);
+
+insert into employee values(1,'Shashank', 24, '2021-08-10', 10000, 'Lucknow');
+
+insert into employee values(2,'Rahul', 25, '2021-08-10', 20000, 'Khajuraho');
+
+insert into employee values(3,'Sunny', 22, '2021-08-11', 11000, 'Bangalore');
+
+insert into employee values(5,'Amit', 25, '2021-08-11', 12000, 'Noida');
+
+insert into employee values(1,'Puneet', 26, '2021-08-12', 50000, 'Gurgaon');
+select * from employee;
+
+
+select age,sum(salary) as age_groyup_salary from employee group by age;
+
+-----calculate min,max,avg
+
+select age,
+           sum(salary) as age_groyup_salary,
+           max(salary) as age_groyup_salary,
+           min(salary) as age_groyup_salary,
+           avg(salary) as age_groyup_salary,
+           count(*) as age_groyup_salary 
+           from employee group by age;
+
+
+select * from orders_data;
+
+select country,state,count(1) as total_orders from orders_data group by country,state order by country asc;

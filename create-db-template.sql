@@ -307,3 +307,40 @@ select age,
 select * from orders_data;
 
 select country,state,count(1) as total_orders from orders_data group by country,state order by country asc;
+
+---having clause---
+
+select country,state,count(1) from orders_data group by country,state having count(1)=1
+order by country; 
+
+-----group_concat---
+
+select country,group_concat(distinct state) as state_data,
+count(1) as country_wise_orders from orders_data group by country ;
+
+----SUBQUERY-----
+
+select * from employee;
+
+create table employees
+(
+    id int,
+    name varchar(50),
+    salary int
+);
+
+insert into employees values(1,'Shashank',5000),(2,'Amit',5500),(3,'Rahul',7000),(4,'Rohit',6000),(5,'Nitin',4000),(6,'Sunny',7500);
+
+select * from employees;
+
+----write a query to finds all those employees who are earning more than""Rohit"
+
+select * from employees where salary >(select salary from employees where name='rohit');
+
+select * from orders_data;
+
+---write a query to find those orders which were placed in seatle or goa.ADD
+
+select * from orders_data where state in('seatle','goa');
+
+---case when statement----

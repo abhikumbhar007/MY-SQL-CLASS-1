@@ -2,3 +2,58 @@
 ----CASE WHEN STATEMANET----
 
 
+use test1;
+CREATE TABLE STUDENT_MARKS
+(
+  STUD_ID INT,
+  STUD_NAME VARCHAR(50),
+  TOTAL_MARKS INT
+);
+
+INSERT INTO STUDENT_MARKS values(1,'SHAHANK',50);
+INSERT INTO STUDENT_MARKS values(2,'Abhi',91);
+INSERT INTO STUDENT_MARKS values(3,'raj',34);
+INSERT INTO STUDENT_MARKS values(4,'sahil',45);
+INSERT INTO STUDENT_MARKS values(5,'pooja',55);
+INSERT INTO STUDENT_MARKS values(6,'ashish',65);
+
+select * from STUDENT_MARKS;
+
+select *,case when total_marks>=80 then 'A'
+               when total_marks>=50 and total_marks<80 then 'B'
+               when total_marks>40 and total_marks<50 then 'C'
+               else 'fail' end as grade from STUDENT_MARKS order by grade asc;
+        
+select * from orders_data;
+drop table STUDENT_MARKS;
+
+
+----derive a new column to print the continents--
+
+select *,case when country='India' then 'Asia'
+              when country='USA' then 'Amerika'
+              else 'Europe' end as continent
+            from orders_data;
+
+
+---
+
+
+create table tree
+(node int,
+parent int); 
+
+insert into tree values(8,5),(9,5),(4,8),(5,8),(2,9),(1,9),(5,null);
+
+drop table tree;
+select * from tree;
+
+select node,
+       CASE
+            when node not in (select distinct parent from tree where parent is not null) then 'LEAF'
+            when parent is null then 'ROOT'
+            else 'INNER'
+       END as node_type
+from tree;
+
+

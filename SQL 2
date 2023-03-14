@@ -57,3 +57,69 @@ select node,
 from tree;
 
 
+----Joins------:::::
+
+create table orders
+(
+    order_id int,
+    cust_id int,
+    order_dat date, 
+    shipper_id int
+);
+
+create table customers
+(
+    cust_id int,
+    cust_name varchar(50),
+    country varchar(50)
+);
+
+create table shippers
+(
+    ship_id int,
+    shipper_name varchar(50)
+);
+
+select * from orders;
+select * from customers;
+select * from shippers;
+
+insert into orders values(10308, 2, '2022-09-15', 3);
+insert into orders values(10309, 30, '2022-09-16', 1);
+insert into orders values(10310, 41, '2022-09-19', 2);
+
+insert into customers values(1, 'Neel', 'India');
+insert into customers values(2, 'Nitin', 'USA');
+insert into customers values(3, 'Mukesh', 'UK');
+
+insert into shippers values(3,'abc');
+insert into shippers values(1,'xyz');
+
+select * from orders;
+select * from customers;
+select * from shippers;
+
+----Inner Join---
+
+--INNER JOIN: Returns records that have matching values in both tables
+select o.*,c.* from orders o inner join customers c on o.cust_id=c.cust_id;
+
+---write a sql query to find those customer details who place some order and belongs to india.
+
+select c.*,o.* from orders o inner join customers c on o.cust_id=c.cust_id and c.country='India';
+
+select c.country,o.order_id from customers c,orders o where o.cust_id=c.cust_id;
+
+-----left join---
+*--LEFT JOIN: Returns all records from the left table, and the matched records from the right table
+select * from orders o left join customers c on o.cust_id=c.cust_id;
+
+---right join
+
+---*RIGHT JOIN: Returns all records from the right table, and the matched records from the left table
+select * from orders o right join customers c on o.cust_id=c.cust_id;
+
+---multiple table join--
+
+select * from orders o inner join customers c on o.cust_id=c.cust_id
+inner join shippers s on s.ship_id = o.shipper_id;

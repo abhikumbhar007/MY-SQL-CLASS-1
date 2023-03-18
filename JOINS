@@ -1,1 +1,55 @@
 
+create database JOIN1;
+
+show databases;
+
+use JOIN1;
+create table employee(
+        emp_id VARCHAR(10),
+        emp_name VARCHAR(100),
+        salary int,
+        dept_id VARCHAR(200),
+        manager_id VARCHAR(200));
+
+DROP TABLE employee;
+
+        select * from employee;
+        insert into employee values('E1','RAHUL',15000,'D1','M1'),
+        ('E2','RAJ',15000,'D1','M1'),
+        ('E3','JAY',55000,'D2','M2'),
+        ('E4','ABHI',25000,'D2','M2'),
+        ('E5','SAHIL',20000,'D10','M3'),
+        ('E6','KUNAL',35000,'D10','M3');
+
+    create table department(
+        dept_id VARCHAR(100),
+        dept_name varchar(100));
+
+        insert into department values('D1','IT'),
+        ('D2','HR'),
+        ('D3','FINANCE'),
+        ('D4','ADMIN');
+
+    CREATE TABLE MANAGER (manager_id varchar(200),
+    manager_name varchar(200),
+    dept_id varchar(200));
+
+    insert into MANAGER values('M1','PREM','D3'),
+    ('M2','AJIT','D4'),
+    ('M3','VIGHNESH','D1'),
+    ('M4','KARTIK','D1');
+
+    CREATE TABLE PROJECTS (PROJECT_ID VARCHAR(100),
+    PROJECT_NAME VARCHAR(200),
+    TEAM_MEMBER_ID VARCHAR(200));
+
+    INSERT INTO PROJECTS VALUES('P1','DATA MIGRATION','E1'),
+    ('P1','DATA MIGRATION','E1'),
+    ('P1','DATA MIGRATION','E1'),
+    ('P2','ETL TOOL','E1'),
+    ('P2','ETL TOOL','E1');
+
+    SELECT * FROM employee;
+    SELECT * FROM department;
+    SELECT * FROM MANAGER;
+    SELECT * FROM PROJECTS;

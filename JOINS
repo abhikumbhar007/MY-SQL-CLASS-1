@@ -53,3 +53,31 @@ DROP TABLE employee;
     SELECT * FROM department;
     SELECT * FROM MANAGER;
     SELECT * FROM PROJECTS;
+
+Q1----fetch the employee name and department name they belongs to.
+
+----INNER JOIN/JOIN--
+
+---ANSI SYNTAX--
+
+Select e.emp_name,d.dept_name
+from employee e inner join department d on e.dept_id=d.dept_id;
+
+--NON-ANSI SYNTAX---
+Select e.emp_name,d.dept_name
+from employee e,department d where e.dept_id=d.dept_id;
+
+
+--LEFT JOIN--
+
+--fetch the all employee name and their department name they belongs to.
+
+Select e.emp_name,d.dept_name
+from employee e left join department d on e.dept_id=d.dept_id;
+
+NOTE-- NON ANSI SYNTAX OF LEFT/RIGHT JOIN IS NOT WORKING IN MYSQL AND OTHER EXCEPT ORACLE DATABASE.
+
+---RIGHT JOIN----
+
+Select e.emp_name,d.dept_name
+from employee e right join department d on e.dept_id=d.dept_id;

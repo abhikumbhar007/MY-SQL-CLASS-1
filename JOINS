@@ -11,8 +11,6 @@ create table employee(
         dept_id VARCHAR(200),
         manager_id VARCHAR(200));
 
-DROP TABLE employee;
-
         select * from employee;
         insert into employee values('E1','RAHUL',15000,'D1','M1'),
         ('E2','RAJ',15000,'D1','M1'),
@@ -81,3 +79,30 @@ NOTE-- NON ANSI SYNTAX OF LEFT/RIGHT JOIN IS NOT WORKING IN MYSQL AND OTHER EXCE
 
 Select e.emp_name,d.dept_name
 from employee e right join department d on e.dept_id=d.dept_id;
+
+
+--ALL JOINS IN ONE QUERY--
+---FETCH DETAILS OF ALL EMP,ALL MANAGER, THEIR DEPARTMENTS AND THE PROJECTS THEY WORK ON.ADD
+
+SELECT e.emp_name,d.dept_name,m.manager_name,P.PROJECT_NAME
+from employee e
+left join department d on e.dept_id=d.dept_id
+join MANAGER m on m.manager_id=e.manager_id
+LEFT join PROJECTS P on P.TEAM_MEMBER_ID=e.emp_id;
+
+---FULL OUTER JOIN--
+
+
+SELECT e.emp_name,d.dept_name 
+from employee e
+full join department d on d.dept_id = e.dept_id;
+
+
+---CROSS JOIN--
+
+---IT RETURNS CARTESION PRODUST--
+
+select e.emp_name,d.dept_name
+from employee 
+cross join department d;
+

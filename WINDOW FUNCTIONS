@@ -1,0 +1,82 @@
+create database JOIN1;
+
+show databases;
+
+use JOIN1;
+create table employee(
+        emp_id int,
+        emp_name VARCHAR(100),
+        salary int,
+        dept_name VARCHAR(200)
+        );
+
+select * from employee;
+insert into employee values('101','RAHUL',15000,'admin'),
+        ('102','RAJ',15000,'hr'),
+        ('103','JAY',55000,'finance'),
+        ('104','ABHI',25000,'hr'),
+        ('105','SAHIL',20000,'finance'),
+        ('106','KUNAL',35000,'hr'),
+        ('106','KUNAL',35000,'admin'),
+        ('107','rahil',20400,'admin');
+
+drop table employee;
+    --how to find MAX salary from the table--
+
+select MAX(salary) as max_salary from employee;
+
+---how to find ADD max salary earned by emp from each dept.--
+
+select dept_name,MAX(salary) as max_salary from employee group by dept_name;
+
+----how to find add max salary from each dept
+select e.*,max(salary) over(partition by dept_name) as max_salary from employee e;
+
+---ROW_NUMBER--
+
+select e.*, row_number() over(partition by dept_name) as rn from employee e;
+
+----Fetch the first 2 employees from each department to join the compony.
+
+select * from(select e.*, row_number() over(partition by dept_name order by emp_id) as rn 
+from employee e) as X where X.rn<3;
+
+----RANK()---
+
+---FETCH THE TOP 3 EMPLOYEES IN EACH DEPARTMENT EARNING THE MAX SALARY.
+
+select * from(select e.*,rank() over(partition by dept_name order by salary desc) as rnk
+from employee e) as X where X.rnk<4;
+
+
+---DENSE_RANK()---
+
+select e.*,rank() over(partition by dept_name order by salary desc) as rnk, 
+dense_rank() over (partition by dept_name order by salary desc) as DENSE_rnk,
+row_number() over(partition by dept_name order by salary desc) as rn
+from employee e;
+
+select * from employee;
+
+
+
+--LEAD() AND LAG()---
+
+--fetch a query to display if the salary of an employee is higher,lower or equal to the previous employee
+
+
+select e.*,lag(salary) over (partition by dept_name order by emp_id) as prev_emp_salary
+from employee e;
+
+select e.*,lead(salary) over (partition by dept_name order by emp_id) as next_emp_salary
+from employee e;
+
+---fetch a query to display if the salary of an employee is higher ,lower or equal to the previous employee.
+
+select e.*,
+lag(salary) over (partition by dept_name order by emp_id) as prev_emp_salary,
+case when e.salary > lag(salary) over (partition by dept_name order by emp_id) then 'Higher than previous employee'
+    when e.salary < lag(salary) over (partition by dept_name order by emp_id) then 'lower than previous employee'
+    when e.salary = lag(salary) over (partition by dept_name order by emp_id) then 'same as than previous employee'
+    end as sal_range
+from employee e;
